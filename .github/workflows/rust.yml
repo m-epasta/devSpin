@@ -15,16 +15,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Run security audit
       uses: actions-rust-lang/audit@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-    
+
     - name: Check code formatting
       working-directory: devspin-cli
       run: cargo fmt --all -- --check
-    
+
     - name: Run clippy linter
       working-directory: devspin-cli
       run: cargo clippy -- -D warnings
@@ -38,7 +38,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     # Cache dependencies for faster builds (adjust paths for each OS)
     - name: Cache Cargo dependencies (Linux/macOS)
       if: runner.os != 'Windows'
@@ -46,20 +46,20 @@ jobs:
       with:
         path: ~/.cargo/registry
         key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-    
+
     - name: Cache Cargo dependencies (Windows)
       if: runner.os == 'Windows'
       uses: actions/cache@v4
       with:
         path: ~/.cargo/registry
         key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-    
+
     - name: Cache Cargo index
       uses: actions/cache@v4
       with:
         path: ~/.cargo/git
         key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
-    
+
     - name: Cache cargo build
       uses: actions/cache@v4
       with:
@@ -69,27 +69,27 @@ jobs:
     - name: Check compilation
       working-directory: devspin-cli
       run: cargo check --all-targets
-    
+
     - name: Run tests
       working-directory: devspin-cli
       run: cargo test --verbose
-  
+
   msrv:
     name: MSRV Check
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Install latest Rust stable
       uses: dtolnay/rust-toolchain@stable
-      
+
     - name: Cache Cargo dependencies
       uses: actions/cache@v4
       with:
         path: ~/.cargo/registry
         key: msrv-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-    
+
     - name: Check compilation on MSRV
       working-directory: devspin-cli
       run: cargo check --all-targets

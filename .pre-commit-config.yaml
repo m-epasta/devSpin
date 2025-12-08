@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cd devspin-cli && cargo fmt --
+        language: system
+        files: devspin-cli/\.rs$
+        pass_filenames: false
+
+      - id: cargo-clippy
+        name: cargo clippy
+        entry: cd devspin-cli && cargo clippy -- -D warnings
+        language: system
+        files: devspin-cli/\.rs$
+        pass_filenames: false
+
+      - id: cargo-check
+        name: cargo check
+        entry: cd devspin-cli && cargo check --all-targets
+        language: system
+        files: devspin-cli/\.(rs|toml)$
+        pass_filenames: false

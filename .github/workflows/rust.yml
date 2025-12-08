@@ -5,8 +5,30 @@ on:
     branches: [ main, develop ]
   pull_request:
     branches: [ main, develop ]
+  release:
+    types: [ published ]
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Run security audit
+      uses: actions-rust-lang/audit@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Check code formatting
+      working-directory: devspin-cli
+      run: cargo fmt --all -- --check
+    
+    - name: Run clippy linter
+      working-directory: devspin-cli
+      run: cargo clippy -- -D warnings
+
   test:
     name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -43,15 +65,7 @@ jobs:
       with:
         path: devspin-cli/target
         key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
-    
-    - name: Check code formatting
-      working-directory: devspin-cli
-      run: cargo fmt --all -- --check
-    
-    - name: Run clippy linter
-      working-directory: devspin-cli
-      run: cargo clippy -- -D warnings
-    
+
     - name: Check compilation
       working-directory: devspin-cli
       run: cargo check --all-targets
@@ -79,3 +93,28 @@ jobs:
     - name: Check compilation on MSRV
       working-directory: devspin-cli
       run: cargo check --all-targets
+
+  release:
+    name: Release
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Rust stable
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Build release binary
+      working-directory: devspin-cli
+      run: cargo build --release
+
+    - name: Upload binaries
+      uses: actions/upload-release-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./devspin-cli/target/release/devspin-cli
+        asset_name: devspin-cli-linux-x64
+        asset_content_type: application/octet-stream

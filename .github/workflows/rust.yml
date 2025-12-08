@@ -30,6 +30,14 @@ jobs:
       if: steps.audit-cache.outputs.cache-hit != 'true'
       run: cargo install cargo-audit --locked
 
+    - name: Cache advisory database
+      uses: actions/cache@v4
+      with:
+        path: ~/.cargo/advisory-db
+        key: advisory-db-${{ github.run_number }}
+        restore-keys: |
+          advisory-db-
+
     - name: Run security audit
       working-directory: devspin-cli
       run: cargo audit

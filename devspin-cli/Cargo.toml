@@ -1,7 +1,12 @@
 [package]
 name = "devspin-cli"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+description = "Development environment manager CLI"
+license = "MIT"
+repository = "https://github.com/m-epasta/devSpin"
+authors = ["m-epasta"]
+readme = "README.md"
 
 [dependencies]
 clap = { version = "4.5.53", features = ["derive"] }

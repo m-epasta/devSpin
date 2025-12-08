@@ -16,10 +16,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Install cargo-audit
+      run: cargo install cargo-audit --locked
+
     - name: Run security audit
-      uses: actions-rust-lang/audit@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      working-directory: devspin-cli
+      run: cargo audit
+      continue-on-error: false  # Fail if vulnerabilities found
 
     - name: Check code formatting
       working-directory: devspin-cli

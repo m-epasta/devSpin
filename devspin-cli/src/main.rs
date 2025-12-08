@@ -10,5 +10,4 @@ async fn main() {
     let cli = Cli::parse();
     #[allow(unused_must_use)]
     cli.execute().await;
-
 }

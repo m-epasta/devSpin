@@ -1,6 +1,5 @@
 use clap::{Parser, Subcommand};
 
-
 #[derive(Parser)]
 #[command(name = "devspin")]
 #[command(about = "Development environment manager")]

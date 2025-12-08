@@ -2,7 +2,7 @@
 //! PLS ME, DO NOT CHANGE THIS LOGIC
 
 use assert_cmd::cargo::cargo_bin_cmd;
-use predicates::prelude::*;  // For .not()
+use predicates::prelude::*; // For .not()
 
 #[test]
 fn test_test_cmd_without_w_msg_flag() {
@@ -17,13 +17,13 @@ fn test_test_cmd_without_w_msg_flag() {
 fn test_test_cmd_with_w_msg_flag() {
     let mut cmd = cargo_bin_cmd!("devspin-cli");
     cmd.arg("test-cmd").arg("--w-msg");
-    cmd.assert()
-        .success()
-        .stdout(predicates::str::contains("
+    cmd.assert().success().stdout(predicates::str::contains(
+        "
     ██████╗ ███████╗██╗   ██╗███████╗██████╗ ██╗███╗   ██╗
     ██╔══██╗██╔════╝██║   ██║██╔════╝██╔══██╗██║████╗  ██║
     ██║  ██║█████╗  ██║   ██║███████╗██████╔╝██║██╔██╗ ██║
     ██║  ██║██╔══╝  ╚██╗ ██╔╝╚════██║██╔═══╝ ██║██║╚██╗██║
     ██████╔╝███████╗ ╚████╔╝ ███████║██║     ██║██║ ╚████║
-    ╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝"));
+    ╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝",
+    ));
 }

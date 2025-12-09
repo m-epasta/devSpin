@@ -1,0 +1,12 @@
+
+
+MAIN:
+    search at root 
+    for **.yml in root:
+        is name devspin ? return path : continue
+    (not in root)
+    create thread for every folder EXCEPT certain like node_modules:
+    for (folder, thread):
+        check for **/yml
+    if not devspin.yml found:
+        return error (String — no panic)

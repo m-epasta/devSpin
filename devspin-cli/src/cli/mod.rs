@@ -27,3 +27,4 @@ impl Cli {
 }
 
 mod test_cmd;
+mod init;

@@ -101,8 +101,8 @@ pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
         let mut check_dir = dir.clone();
         let mut level = 0;
         loop {
-            // Skip filesystem root
-            if *check_dir == *"/" {
+            // Skip checking indicators at filesystem root
+            if check_dir.parent().is_none() {
                 break;
             }
 
@@ -140,5 +140,8 @@ pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
 
 pub fn get_root_no_param() -> Result<PathBuf, String> {
     let curr_dir = std::env::current_dir().map_err(|e| format!("Failed to get root: {}", e))?;
-    get_root(curr_dir)
+    let canonical = curr_dir
+        .canonicalize()
+        .map_err(|e| format!("Failed to canonicalize dir: {}", e))?;
+    get_root(canonical)
 }

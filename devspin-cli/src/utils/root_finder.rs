@@ -2,9 +2,15 @@ use std::path::PathBuf;
 
 /// Find project root by scanning upward for prioritized indicators
 pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
-    let dir = current_dir
-        .canonicalize()
-        .map_err(|_| "Invalid current directory".to_string())?;
+    // Validate that the directory exists
+    if !current_dir.exists() {
+        return Err("Invalid current directory".to_string());
+    }
+    if !current_dir.is_dir() {
+        return Err("Invalid current directory".to_string());
+    }
+
+    let dir = current_dir;
 
     // Indicators grouped by priority - search groups in order
     let indicator_groups: &[&[(&str, bool)]] = &[

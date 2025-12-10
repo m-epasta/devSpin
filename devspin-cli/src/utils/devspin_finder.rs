@@ -4,16 +4,19 @@ use std::time::{Duration, Instant};
 use walkdir::WalkDir;
 
 /// Find devspin.yml using parallel search with Rayon
-pub fn find_devspin_yml_parallel(root: &str) -> Result<PathBuf, String> {
+pub fn find_devspin_yml_parallel(root: impl AsRef<Path>) -> Result<PathBuf, String> {
     find_devspin_yml_with_timeout(root, Duration::from_secs(30))
 }
 
 /// Version with timeout
-pub fn find_devspin_yml_with_timeout(root: &str, timeout: Duration) -> Result<PathBuf, String> {
+pub fn find_devspin_yml_with_timeout(
+    root: impl AsRef<Path>,
+    timeout: Duration,
+) -> Result<PathBuf, String> {
     let start = Instant::now();
 
     // Quick root check first (common case optimization)
-    let root_path = Path::new(root);
+    let root_path = root.as_ref();
     let root_file = root_path.join("devspin.yml");
     if root_file.is_file() {
         println!("Found in root after {:?}", start.elapsed());
@@ -22,17 +25,20 @@ pub fn find_devspin_yml_with_timeout(root: &str, timeout: Duration) -> Result<Pa
 
     // Validate root exists
     if !root_path.exists() {
-        return Err(format!("Root directory '{}' does not exist", root));
+        return Err(format!(
+            "Root directory '{}' does not exist",
+            root.as_ref().display()
+        ));
     }
 
     if !root_path.is_dir() {
-        return Err(format!("'{}' is not a directory", root));
+        return Err(format!("'{}' is not a directory", root.as_ref().display()));
     }
 
-    println!("Starting parallel search in: {}", root);
+    println!("Starting parallel search in: {}", root.as_ref().display());
 
     // Single parallel search with filter_entry
-    let result = WalkDir::new(root)
+    let result = WalkDir::new(&root)
         .follow_links(true)
         .into_iter()
         .filter_entry(|entry| !should_skip_entry(entry))
@@ -62,11 +68,15 @@ pub fn find_devspin_yml_with_timeout(root: &str, timeout: Duration) -> Result<Pa
             if elapsed > timeout {
                 Err(format!(
                     "Search timed out after {:?} in '{}'",
-                    timeout, root
+                    timeout,
+                    root.as_ref().display()
                 ))
             } else {
                 println!("Not found after {:?}", elapsed);
-                Err(format!("devspin.yml not found under '{}'", root))
+                Err(format!(
+                    "devspin.yml not found under '{}'",
+                    root.as_ref().display()
+                ))
             }
         }
     }

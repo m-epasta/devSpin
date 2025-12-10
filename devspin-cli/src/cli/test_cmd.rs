@@ -2,6 +2,8 @@
 
 use clap::Args;
 
+use crate::error::ProcessError;
+
 #[derive(Debug, Args, Clone)]
 pub struct TestCmd {
     /// Print DEVSPIN in ASCII art
@@ -10,7 +12,7 @@ pub struct TestCmd {
 }
 
 impl TestCmd {
-    pub async fn execute(&self) -> Result<(), anyhow::Error> {
+    pub async fn execute(&self) -> Result<(), ProcessError> {
         use colored::*;
         if self.w_msg {
             println!(

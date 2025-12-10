@@ -26,5 +26,5 @@ impl Cli {
     }
 }
 
-mod test_cmd;
 mod init;
+mod test_cmd;

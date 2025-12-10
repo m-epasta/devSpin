@@ -11,7 +11,7 @@ mod tests {
         let temp_dir = tempdir().unwrap();
         let config_path = temp_dir.path().join("devspin.yml");
         File::create(&config_path).unwrap();
-        
+
         let result = find_devspin_yml_parallel(temp_dir.path().to_str().unwrap());
         assert!(result.is_ok());
         assert_eq!(result.unwrap(), config_path.to_string_lossy());
@@ -24,7 +24,7 @@ mod tests {
         fs::create_dir(&subdir).unwrap();
         let config_path = subdir.join("devspin.yml");
         File::create(&config_path).unwrap();
-        
+
         let result = find_devspin_yml_parallel(temp_dir.path().to_str().unwrap());
         assert!(result.is_ok());
     }
@@ -36,7 +36,7 @@ mod tests {
         fs::create_dir(&node_modules).unwrap();
         let config_path = node_modules.join("devspin.yml");
         File::create(&config_path).unwrap(); // This should be skipped
-        
+
         let result = find_devspin_yml_parallel(temp_dir.path().to_str().unwrap());
         assert!(result.is_err()); // Should NOT find it in node_modules
     }

@@ -28,9 +28,5 @@ name = "hello_test"
 path = "tests/hello_test.rs"
 
 [[test]]
-name = "devspin_finder_test"
-path = "tests/devspin_finder_test.rs"
-
-[[test]]
 name = "utils_devspin_finder_test"
 path = "tests/utils_tests/devspin_finder_test.rs"

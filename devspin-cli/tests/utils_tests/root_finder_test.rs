@@ -76,7 +76,11 @@ mod tests {
     fn test_no_root_found() {
         // Create an isolated directory in a guaranteed-clean location
         // Use a path in temp that's specifically for testing no roots found
-        let test_base = std::env::temp_dir().join("devspin_no_root_test");
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let test_base = std::env::temp_dir().join(format!("devspin_no_root_test_{}", timestamp));
         let isolated_dir = test_base
             .join("level1")
             .join("level2")

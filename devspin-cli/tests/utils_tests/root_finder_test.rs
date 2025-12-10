@@ -74,13 +74,27 @@ mod tests {
 
     #[test]
     fn test_no_root_found() {
-        let temp_dir = tempdir().unwrap();
-        let isolated_dir = temp_dir.path().join("random").join("dir");
+        // Create an isolated directory in a guaranteed-clean location
+        // Use a path in temp that's specifically for testing no roots found
+        let test_base = std::env::temp_dir().join("devspin_no_root_test");
+        let isolated_dir = test_base
+            .join("level1")
+            .join("level2")
+            .join("level3")
+            .join("no_indicators_here");
         fs::create_dir_all(&isolated_dir).unwrap();
 
-        let result = get_root(isolated_dir);
+        // Make sure this directory doesn't contain any indicators itself
+        assert!(!isolated_dir.join(".git").exists());
+        assert!(!isolated_dir.join("Cargo.toml").exists());
+        assert!(!isolated_dir.join("src").exists());
+
+        let result = get_root(isolated_dir.clone());
         assert!(result.is_err());
         assert!(result.unwrap_err().contains("No project root found"));
+
+        // Clean up
+        let _ = std::fs::remove_dir_all(&test_base);
     }
 
     #[test]
@@ -118,7 +132,12 @@ mod tests {
 
         let result = get_root_no_param();
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), temp_dir.path());
+        // On macOS, current_dir() returns canonicalized paths, so we need to compare canonicalized
+        let expected = temp_dir
+            .path()
+            .canonicalize()
+            .unwrap_or(temp_dir.path().to_path_buf());
+        assert_eq!(result.unwrap(), expected);
 
         // Restore original directory
         std::env::set_current_dir(original_dir).unwrap();

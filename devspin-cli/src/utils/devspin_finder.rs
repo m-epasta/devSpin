@@ -4,12 +4,12 @@ use std::time::{Duration, Instant};
 use walkdir::WalkDir;
 
 /// Find devspin.yml using parallel search with Rayon
-pub fn find_devspin_yml_parallel(root: &str) -> Result<String, String> {
+pub fn find_devspin_yml_parallel(root: &str) -> Result<PathBuf, String> {
     find_devspin_yml_with_timeout(root, Duration::from_secs(30))
 }
 
 /// Version with timeout
-pub fn find_devspin_yml_with_timeout(root: &str, timeout: Duration) -> Result<String, String> {
+pub fn find_devspin_yml_with_timeout(root: &str, timeout: Duration) -> Result<PathBuf, String> {
     let start = Instant::now();
 
     // Quick root check first (common case optimization)
@@ -17,7 +17,7 @@ pub fn find_devspin_yml_with_timeout(root: &str, timeout: Duration) -> Result<St
     let root_file = root_path.join("devspin.yml");
     if root_file.is_file() {
         println!("Found in root after {:?}", start.elapsed());
-        return Ok(root_file.to_string_lossy().into_owned());
+        return Ok(root_file);
     }
 
     // Validate root exists
@@ -46,18 +46,15 @@ pub fn find_devspin_yml_with_timeout(root: &str, timeout: Duration) -> Result<St
         })
         .find_any(|entry| {
             entry.file_type().is_file()
-                && entry.file_name() == "devspin.yml"
-                && entry
-                    .path()
-                    .extension()
-                    .map(|e| e == "yml")
-                    .unwrap_or(false)
+                && ["devspin.yml", "devspin.yaml", ".devspin.yml"]
+                    .iter()
+                    .any(|&name| entry.file_name() == name)
         })
-        .map(|entry| entry.path().to_string_lossy().into_owned());
+        .map(|entry| entry.path().to_path_buf());
 
     match result {
         Some(path) => {
-            println!("Found in {:?}: {}", start.elapsed(), path);
+            println!("Found in {:?}: {}", start.elapsed(), path.display());
             Ok(path)
         }
         None => {
@@ -149,33 +146,3 @@ fn should_skip_entry(entry: &walkdir::DirEntry) -> bool {
         false
     }
 }
-
-/// Search multiple possible config names
-pub fn find_config_file(root: &str) -> Result<PathBuf, String> {
-    let config_names = ["devspin.yml", "devspin.yaml", ".devspin.yml"];
-
-    for name in &config_names {
-        let path = Path::new(root).join(name);
-        if path.is_file() {
-            return Ok(path);
-        }
-    }
-
-    // Fall back to parallel search
-    let result = WalkDir::new(root)
-        .into_iter()
-        .filter_entry(|entry| !should_skip_entry(entry))
-        .par_bridge()
-        .filter_map(|e| e.ok())
-        .find_any(|entry| {
-            entry.file_type().is_file()
-                && config_names.iter().any(|&name| entry.file_name() == name)
-        })
-        .map(|e| e.path().to_path_buf());
-
-    result.ok_or_else(|| {
-        let names = config_names.join(", ");
-        format!("None of [{}] found under '{}'", names, root)
-    })
-}
-// TODO: verify the code because im getting hrut by my mom

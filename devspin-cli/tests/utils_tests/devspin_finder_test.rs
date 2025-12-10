@@ -14,7 +14,7 @@ mod tests {
 
         let result = find_devspin_yml_parallel(temp_dir.path().to_str().unwrap());
         assert!(result.is_ok());
-        assert_eq!(result.unwrap(), config_path.to_string_lossy());
+        assert_eq!(result.unwrap(), config_path);
     }
 
     #[test]

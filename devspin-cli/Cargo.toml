@@ -23,6 +23,10 @@ tempfile = "3.2"
 assert_cmd = "2.0"
 predicates = "3.0"
 
+
+
+
+# ============================= TESTS =============================
 [[test]]
 name = "hello_test"
 path = "tests/hello_test.rs"
@@ -30,3 +34,7 @@ path = "tests/hello_test.rs"
 [[test]]
 name = "utils_devspin_finder_test"
 path = "tests/utils_tests/devspin_finder_test.rs"
+
+[[test]]
+name = "utils_root_finder_test"
+path = "tests/utils_tests/root_finder_test.rs"

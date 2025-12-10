@@ -30,6 +30,8 @@ const SYSTEM_PATHS: &[&str] = &[
     "/run",
     "/media",
     // Windows specific (using forward slashes for consistency)
+    "C:/",
+    "C:/Users",
     "C:/Windows",
     "C:/Program Files",
     "C:/Program Files (x86)",

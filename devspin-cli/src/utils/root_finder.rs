@@ -1,5 +1,37 @@
 use std::path::PathBuf;
 
+const MAX_SEARCH_DEPTH: usize = 10;
+const SYSTEM_PATHS: &[&str] = &[
+    // Common
+    "/",
+    "/tmp",
+    "/var",
+    "/usr",
+    "/opt",
+    // macOS specific
+    "/System",
+    "/Users",
+    "/Applications",
+    "/Library",
+    "/System/Library",
+    "/Volumes",
+    "/private",
+    // Linux specific
+    "/proc",
+    "/sys",
+    "/dev",
+    "/boot",
+    "/mnt",
+    "/run",
+    "/media",
+    // Windows specific (using forward slashes for consistency)
+    "C:/Windows",
+    "C:/Program Files",
+    "C:/Program Files (x86)",
+    "C:/ProgramData",
+    "C:/System32",
+];
+
 /// Find project root by scanning upward for prioritized indicators
 pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
     // Validate that the directory exists
@@ -67,9 +99,15 @@ pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
     // Search each group in priority order
     for &group in indicator_groups {
         let mut check_dir = dir.clone();
+        let mut level = 0;
         loop {
             // Skip filesystem root
             if *check_dir == *"/" {
+                break;
+            }
+
+            // Skip if exceeded max search depth
+            if level > MAX_SEARCH_DEPTH {
                 break;
             }
 
@@ -82,7 +120,8 @@ pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
                     path.is_file()
                 };
 
-                if exists {
+                let normalized_check = check_dir.to_string_lossy().replace('\\', "/");
+                if exists && !SYSTEM_PATHS.iter().any(|&s| s == normalized_check) {
                     return Ok(check_dir);
                 }
             }
@@ -92,6 +131,7 @@ pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
                 Some(parent) => check_dir = parent.to_path_buf(),
                 None => break,
             }
+            level += 1;
         }
     }
 

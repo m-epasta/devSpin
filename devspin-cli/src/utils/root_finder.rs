@@ -1,6 +1,11 @@
 use std::path::PathBuf;
 
 const MAX_SEARCH_DEPTH: usize = 10;
+fn is_temporary_dir(check_dir: &std::path::Path) -> bool {
+    let path_str = check_dir.to_string_lossy().to_lowercase();
+    path_str.contains("temp") || path_str.contains("tmp")
+}
+
 const SYSTEM_PATHS: &[&str] = &[
     // Common
     "/",
@@ -120,8 +125,11 @@ pub fn get_root(current_dir: PathBuf) -> Result<PathBuf, String> {
                     path.is_file()
                 };
 
+                let is_common_group = std::ptr::eq(group, *indicator_groups.last().unwrap());
+                let skip_temp = is_common_group && is_temporary_dir(&check_dir) && level > 3;
+
                 let normalized_check = check_dir.to_string_lossy().replace('\\', "/");
-                if exists && !SYSTEM_PATHS.iter().any(|&s| s == normalized_check) {
+                if exists && !skip_temp && !SYSTEM_PATHS.iter().any(|&s| s == normalized_check) {
                     return Ok(check_dir);
                 }
             }

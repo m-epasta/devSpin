@@ -84,7 +84,7 @@ pub fn find_devspin_yml_with_timeout(
 
 /// Check if we should skip this entry (and its children)
 fn should_skip_entry(entry: &walkdir::DirEntry) -> bool {
-    let skip_dirs = [
+    let skip_dirs: [&str; 51] = [
         // Node/JavaScript
         "node_modules",
         "npm",

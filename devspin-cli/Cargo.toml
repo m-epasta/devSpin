@@ -38,3 +38,8 @@ path = "tests/utils_tests/devspin_finder_test.rs"
 [[test]]
 name = "utils_root_finder_test"
 path = "tests/utils_tests/root_finder_test.rs"
+
+
+[[test]]
+name = "utils_create_devspin_file_test"
+path = "tests/utils_tests/create_devspin_file_test.rs"

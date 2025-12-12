@@ -160,11 +160,9 @@ impl DevSpinGenerator {
 
         for &line in input {
             if in_header {
-                if line.trim().is_empty() {
-                    if version_found && name_found && base_found {
-                        in_header = false;
-                        continue;
-                    }
+                if line.trim().is_empty() && version_found && name_found && base_found {
+                    in_header = false;
+                    continue;
                 }
 
                 if line.trim().starts_with("version:") {

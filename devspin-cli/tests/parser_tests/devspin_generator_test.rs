@@ -71,5 +71,4 @@ mod tests {
         let result = DevSpinGenerator::generate(input);
         assert!(result.is_err());
     }
-
 }

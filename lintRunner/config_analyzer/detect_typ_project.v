@@ -53,12 +53,13 @@ fn detect_config_type(fi FileMetadata) string {
 	} else if fi.file_name == 'pyproject.toml' || fi.file_name == 'requirements.txt' {
 		return 'python_project'
 	} else if fi.file_ext == '.json' {
-		if fi.file_name.starts_with('package') {
+		// Check specific files first
+		if fi.file_name == 'tsconfig.json' {
+			return 'typescript_config'
+		} else if fi.file_name.starts_with('package') {
 			return 'package_config'
 		} else if fi.file_name.contains('config') || fi.file_name.contains('settings') {
 			return 'app_config'
-		} else if fi.file_name == 'tsconfig.json' {
-			return 'typescript_config'
 		} else {
 			return 'generic_json'
 		}

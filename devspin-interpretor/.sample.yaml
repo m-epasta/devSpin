@@ -1,0 +1,62 @@
+version: 1.0
+name: my-app
+base: rust:latest
+
+# Spin Features: Built-in automation capabilities
+# Define which modes are enabled for each feature.
+spin-features:
+  lint:
+    enabled: true
+    modes: [currFile, currDir, all]
+  format:
+    enabled: true
+    modes: [currFile, currDir, all]
+  test:
+    enabled: true
+    modes: [currFile, currDir, all]
+
+# System dependencies to install in the container
+system:
+  - git
+  - curl
+  - npm
+  - openssl
+  - pkg-config
+
+# Environment variables available in the shell
+env:
+  RUST_LOG: debug
+  PORT: 8080
+  DATABASE_URL: postgres://user:password@localhost:5432/mydb
+
+# Services: Sidecar containers (Databases, Caches, etc.)
+services:
+  - name: postgres
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+      
+  - name: redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: password  
+
+# Tasks to automate workflows
+tasks:
+  - name: build
+    command: |
+      echo "Building..."
+      cargo build
+      npm install
+
+  - name: test
+    command: cargo test
+
+  - name: run
+    command: cargo run

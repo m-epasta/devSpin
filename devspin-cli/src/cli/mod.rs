@@ -31,3 +31,4 @@ impl Cli {
 
 mod init;
 mod test_cmd;
+mod config;

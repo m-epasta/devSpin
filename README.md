@@ -1,65 +1,41 @@
-# DevSpin CLI
+# DEVSPIN
 
-A development environment manager command-line tool.
+Devspin, a Development Environment Manager.
 
-## Installation
+## What ? 
+- Devspin manage your project dependencies, services, ci/cd, environment variables, and more in a **SINGLE** config file (named devspin.yml)
+- It implement default features like a linter a formatter and a test generator/runner (more incoming) 
+- It is available via a CLI tool (devspin-cli) a GUI (devspin desktop) and also specialized features available via editor extensions 
 
-### From Source
-```bash
-cargo install --path devspin-cli
-```
+## Why using devspin ?
+- **Simplicity first** : It manages all in one interpreted file (interpretor can be added as an executable in PATH) that can be **autowritten** by devspin itself
+- **content agnostic** : It can be used fore every kind of projects, the interpretor does not care about what is inside your project (once formatted)
+- **portable** : It can be used on any platform and integrate a docker wrapper
+- **containerization** : It use a docker wrapper to manage dependencies and services to appreciate container benefits
+- **interpretor** : The interpretor act as a go.mod, package.json, Cargo.toml ... But with your whole project — The interpretor write dockerfile run it config etc...
 
-### From GitHub Releases
-Download binaries from the latest [release](https://github.com/m-epasta/devSpin/releases).
+## How to use it ?
+- **CLI** : 
+    - install devspin-cli (TODO: add install instructions)
+    
+    - ```bash
+    devspin init # generate a devspin.yml with a sample content
+    devspin config # Configure devspin.yml regarding to your project dependencies,  # services, ci/cd, environment variables, and more — you can also integrate yourself or indicate the details in semi_auto_mode(TODO: link to doc)
+    devspin run # Run devspin.yml
+    ```
 
-## Usage
+- **GUI** : 
+    - install devspin-desktop (TODO: add install instructions)
+    - ```bash
+    devspin-desktop
+    ```
+    
+- **Editor extensions** : 
+    - install devspin-editor (TODO: add install instructions)
 
-```bash
-# Show help
-devspin-cli --help
 
-# Run test command without art
-devspin-cli test-cmd
+# LICENSE
+MIT
 
-# Run test command with ASCII art
-devspin-cli test-cmd --w-msg
-```
-
-## Development
-
-### Prerequisites
-- Rust 1.80 or later
-- Make (optional, for convenience)
-
-### Setup
-```bash
-# Install pre-commit hooks
-pip install pre-commit
-pre-commit install
-
-# Development tasks
-make help  # List all tasks
-make all   # Run all checks
-make test  # Run tests
-make fmt   # Format code
-```
-
-### Contributing
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and checks: `make all`
-5. Commit your changes
-6. Create a pull request
-
-## CI/CD
-
-This project uses GitHub Actions for:
-- **Linting**: Rustfmt, Clippy, Security audit
-- **Testing**: Multi-platform (Linux, macOS, Windows)
-- **MSRV**: Minimum Supported Rust Version check
-- **Releases**: Automated binary builds
-
-## License
-
-MIT License
+# CONTRIBUTING
+if you have any suggestion pls give them to mepastacc@gmail.com

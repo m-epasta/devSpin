@@ -18,7 +18,7 @@ Devspin, a Development Environment Manager.
 - **CLI** : 
     - install devspin-cli (TODO: add install instructions)
     
-    - ```bash
+    ```bash
     devspin init # generate a devspin.yml with a sample content
     devspin config # Configure devspin.yml regarding to your project dependencies,  # services, ci/cd, environment variables, and more — you can also integrate yourself or indicate the details in semi_auto_mode(TODO: link to doc)
     devspin run # Run devspin.yml

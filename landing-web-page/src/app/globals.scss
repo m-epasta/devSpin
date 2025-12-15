@@ -1,0 +1,99 @@
+// Color variables
+:root {
+  --bg-primary: #0a0a0a;        // Pure black
+  --bg-secondary: #111111;      // Dark gray
+  --bg-card: #1a1a1a;           // Slightly lighter gray
+  --text-primary: #f8f8f8;      // Off-white
+  --text-secondary: #a0a0a0;    // Muted gray
+  --accent-terminal: #00ff88;   // Terminal green
+  --accent-cyan: #00d4ff;       // Cyan
+  --accent-magenta: #ff6bff;    // Magenta
+  --shadow-elevation: 0 4px 20px rgba(0, 255, 136, 0.1);
+}
+
+// Global base styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+// Code and terminal text
+.terminal-text {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+// Utility classes
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-terminal), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-terminal {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.glow-magenta {
+  box-shadow: 0 0 20px rgba(255, 107, 255, 0.3);
+}
+
+// Background effects
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 85% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+// Subtle grid overlay
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}

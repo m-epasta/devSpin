@@ -21,13 +21,15 @@ Devspin, a Development Environment Manager.
     ```bash
     devspin init # generate a devspin.yml with a sample content
     devspin config # Configure devspin.yml regarding to your project dependencies,  # services, ci/cd, environment variables, and more — you can also integrate yourself or indicate the details in semi_auto_mode(TODO: link to doc)
-    devspin run # Run devspin.yml
+    devspin run # Run interpreted devspin.yml
+    devspin shell # interpete devspin.yml to know the errors, give diagnostics and setup
     ```
 
 - **GUI** : 
     - install devspin-desktop (TODO: add install instructions)
-    - ```bash
-    devspin-desktop
+
+    ```bash
+    devspin-desktop # or launch from your sys interface
     ```
     
 - **Editor extensions** : 

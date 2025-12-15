@@ -1,0 +1,30 @@
+{
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.checkOnSave.enable": true,
+  "rust-analyzer.checkOnSave.extraArgs": [
+    "--all-targets",
+    "--all-features"
+  ],
+  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.inlayHints.parameterHints": true,
+  "rust-analyzer.inlayHints.typeHints": true,
+  "rust-analyzer.cargo.allTargets": true,
+  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+  "rust-analyzer.linkedProjects": [
+    "${workspaceFolder}/devSpin/devspin-cli/Cargo.toml"
+  ],
+  "rust-analyzer.rustfmt.overrideCommand": ["rustfmt", "--edition", "2021"],
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true,
+  },
+  "editor.rulers": [80, 100],
+  "files.exclude": {
+    "**/target": true,
+    "**/.git": true
+  },
+  "search.exclude": {
+    "**/target": true,
+    "**/Cargo.lock": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "rust-lang.rust-analyzer",
+        "VOSCA.vscode-v-analyzer",
+        "github.vscode-github-actions",
+        "formulahendry.code-runner",
+        "Gruntfuggly.todo-tree"
+    ]
+}

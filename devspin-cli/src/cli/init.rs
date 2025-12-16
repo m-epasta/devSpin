@@ -1,6 +1,6 @@
 use crate::utils::{
     create_devspin_file::create_cfg_file, devspin_finder::find_devspin_yml_parallel,
-    root_finder::{get_root_no_param}
+    root_finder::get_root_no_param,
 };
 
 use crate::prelude::*;
@@ -31,11 +31,10 @@ impl InitArgs {
             }
             root_buf
         } else {
-            get_root_no_param()
-                .map_err(|e| ProcessError::RootNotFound {
-                    error_msg: format!("Could not find project root: {}", e),
-                    exit_status: 404,
-                })?
+            get_root_no_param().map_err(|e| ProcessError::RootNotFound {
+                error_msg: format!("Could not find project root: {}", e),
+                exit_status: 404,
+            })?
         };
 
         // Check if devspin.yml already exists (don't overwrite)
@@ -53,11 +52,10 @@ impl InitArgs {
                 exit_status: 400,
             })?;
 
-        create_cfg_file(root_str)
-            .map_err(|e| ProcessError::CreateFileFailed {
-                error_msg: e.to_string(),
-                exit_status: 400,
-            })?;
+        create_cfg_file(root_str).map_err(|e| ProcessError::CreateFileFailed {
+            error_msg: e.to_string(),
+            exit_status: 400,
+        })?;
 
         Ok(())
     }

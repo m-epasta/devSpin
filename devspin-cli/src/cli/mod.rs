@@ -29,6 +29,6 @@ impl Cli {
     }
 }
 
+mod config;
 mod init;
 mod test_cmd;
-mod config;

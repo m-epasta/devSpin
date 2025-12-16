@@ -1,23 +1,23 @@
 ---
 title: Quick Start
-description: Get SPN running in 5 minutes
+description: Get spin running in 5 minutes
 slug: /quickstart
 sidebar_position: 2
 ---
 
 #  Quick Start
 
-Get SPN running in your environment in less than 5 minutes. By the end of this guide, you'll have a working application that SPN manages completely.
+Get spin running in your environment in less than 5 minutes. By the end of this guide, you'll have a working application that spin manages completely.
 
 ## 📋 Prerequisites
 
 - **Node.js 18+** (for the example app)
 - **Terminal/Command Prompt**
-- **Internet connection** (to download SPN)
+- **Internet connection** (to download spin)
 
 No Docker, Kubernetes, or cloud accounts required for this quick start!
 
-## 1. Install SPN CLI
+## 1. Install spin CLI
 
 Choose your installation method:
 
@@ -27,7 +27,7 @@ Choose your installation method:
 curl -fsSL https://spin.dev/install.sh | sh
 ```
 
-This downloads and installs the SPN CLI to `~/.spin/bin/spin`.
+This downloads and installs the spin CLI to `~/.spin/bin/spin`.
 
 ### Option B: Manual Download
 
@@ -60,7 +60,7 @@ Spin can initialize a project for you:
 mkdir my-first-spin-app
 cd my-first-spin-app
 
-# Initialize with SPN
+# Initialize with spin
 spin init # you can add flags to choose templates 
 ```
 
@@ -69,7 +69,7 @@ This creates:
 - Basic project structure
 
 **IMPORTANT**
-  The spn file get shortcuted so make sure you like the name (you can change it with no consequences)
+  The spin file get shortcuted so make sure you like the name (you can change it with no consequences)
 
 ### Manual Creation (Alternative)
 
@@ -98,11 +98,11 @@ cfg{
 }
 ```
 
-So here: 
+So here:
 1. versioning and configs are minimal <code>#! spn 1.0</code> stand for the interpretor version
-<code>{ name: "my-first-spin-app" }</code> is a minimal config (more is allowed)
+<code>\{ name: "my-first-spin-app" \}</code> is a minimal config (more is allowed)
 
-2. @ chain is targets: Here, it first say that this a service (not an app for scalability) .Then, it tells what is the current runtime, so nodejs. Finnaly, it tells the intepretor that he has to interpret it and put the output in dist/ that gets run in the main Docker file 
+2. @ chain is targets: Here, it first say that this a service (not an app for scalability) .Then, it tells what is the current runtime, so nodejs. Finnaly, it tells the intepretor that he has to interpret it and put the output in dist/ that gets run in the main Docker file
 
 
 Create a simple `package.json`:
@@ -157,7 +157,7 @@ npm install
 
 ## 3. Run Your App
 
-Now for the magic! Run your app with SPN:
+Now for the magic! Run your app with spin:
 
 ```bash
 spin run
@@ -165,7 +165,7 @@ spin run
 
 **What happens next:**
 
-1. **SPN analyzes** your `app.spn` file
+1. **spin analyzes** your `app.spn` file
 2. **Detects** you have a Node.js app
 3. **Generates** a `Dockerfile` (if Docker is available)
 4. **Creates** `docker-compose.yml` for orchestration
@@ -174,7 +174,7 @@ spin run
 You should see output like:
 
 ```
-SPN detected Node.js project
+spin detected Node.js project
 Generated Dockerfile
 Starting application...
   Web server: http://localhost:3000
@@ -187,9 +187,9 @@ Open your browser to **http://localhost:3000**
 
 You should see a page that says "Hello from SPIN!" with the current time.
 
-## 5. Explore What SPN Created
+## 5. Explore What spin Created
 
-SPN generates platform-specific configs for you. Check what was created:
+spin generates platform-specific configs for you. Check what was created:
 
 ```bash
 cd dist/
@@ -203,9 +203,9 @@ You might see:
 ## 🎉 Congratulations!
 
 You've successfully:
-- ✅ Installed SPN CLI
+- ✅ Installed spin CLI
 - ✅ Created an application manifest
-- ✅ Run your first SPN-managed app
+- ✅ Run your first spin-managed app
 - ✅ Seen hot-reload in action
 
 ## 🚀 Next Steps
@@ -219,7 +219,7 @@ Now that you have spin working, explore:
 ## 🆘 Having Issues?
 
 - Check `spin --help` for command options
-- Run `spin validate` to check your SPN file
+- Run `spin validate` to check your spin file
 - Join our [Discord Community](https://discord.gg/spin) for help
 
 **Need to stop the app?** Press `Ctrl+C` in your terminal.

@@ -1,7 +1,7 @@
 {
   "id": "quickstart",
   "title": "Quick Start",
-  "description": "Get SPN running in 5 minutes",
+  "description": "Get spin running in 5 minutes",
   "source": "@site/docs/quickstart.md",
   "sourceDirName": ".",
   "slug": "/quickstart",
@@ -12,12 +12,12 @@
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "m-epasta",
-  "lastUpdatedAt": 1765912022,
+  "lastUpdatedAt": 1765916523,
   "formattedLastUpdatedAt": "Dec 16, 2025",
   "sidebarPosition": 2,
   "frontMatter": {
     "title": "Quick Start",
-    "description": "Get SPN running in 5 minutes",
+    "description": "Get spin running in 5 minutes",
     "slug": "/quickstart",
     "sidebar_position": 2
   },

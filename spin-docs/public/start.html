@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPIN - Declare once. Run anywhere.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #60a5fa, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .code-block {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+            position: relative;
+        }
+
+        .code-block h3 {
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        pre {
+            color: #cbd5e1;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .code-comment {
+            color: #64748b;
+        }
+
+        .code-keyword {
+            color: #60a5fa;
+        }
+
+        .code-string {
+            color: #34d399;
+        }
+
+        .code-number {
+            color: #fbbf24;
+        }
+
+        .terminal {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot:nth-child(1) { background: #ef4444; }
+        .terminal-dot:nth-child(2) { background: #f59e0b; }
+        .terminal-dot:nth-child(3) { background: #10b981; }
+
+        .terminal-line {
+            color: #84cc16;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-line::before {
+            content: '$ ';
+            color: #94a3b8;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #f8fafc;
+        }
+
+        .cta-subtitle {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #64748b;
+        }
+
+        .logo-small {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #60a5fa, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">SPIN</h1>
+            <p class="tagline">Declare once. Run anywhere.</p>
+        </header>
+
+        <div class="demo-grid">
+            <div class="code-block">
+                <h3>app.spn</h3>
+                <pre><code><span class="code-comment">#! spn 1.0</span>
+
+{
+    <span class="code-keyword">name</span>: <span class="code-string">"my-app"</span>
+    <span class="code-keyword">version</span>: <span class="code-string">"1.0.0"</span>
+}
+
+app <span class="code-string">"web"</span> {
+    <span class="code-keyword">type</span>: <span class="code-string">"react"</span>
+    <span class="code-keyword">port</span>: <span class="code-number">3000</span>
+    <span class="code-keyword">needs</span>: [postgres, redis]
+}
+
+<span class="code-comment"># One file works everywhere</span>
+run <span class="code-keyword">local</span> {
+    <span class="code-keyword">mode</span>: execute-if-available
+}
+
+run <span class="code-keyword">production</span> {
+    <span class="code-keyword">mode</span>: execute-required
+    <span class="code-keyword">scaling</span>: { min: <span class="code-number">3</span>, max: <span class="code-number">10</span> }
+}</code></pre>
+            </div>
+
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot"></div>
+                        <div class="terminal-dot"></div>
+                        <div class="terminal-dot"></div>
+                    </div>
+                    <span>terminal</span>
+                </div>
+                <div class="terminal-line">spin run --local</div>
+                <pre style="color: #cbd5e1; margin-top: 1rem;">
+✅ Spin detected Docker... running your app!
+├── Frontend: http://localhost:3000
+├── Postgres: localhost:5432
+└── Redis: localhost:6379
+
+🔍 Watching for changes...</pre>
+                
+                <div class="terminal-line" style="margin-top: 2rem;">spin run --production</div>
+                <pre style="color: #cbd5e1; margin-top: 1rem;">
+🚀 Deploying to production...
+├── Generated: Dockerfile, docker-compose.yml
+├── Generated: k8s/deployment.yaml
+├── Generated: terraform/main.tf
+└── Deployed: AWS ECS, RDS, ElastiCache
+
+🌐 Your app is live at: https://my-app.example.com</pre>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>One Declaration</h3>
+                <p>Describe your app once. Spin adapts it to Docker, Kubernetes, cloud platforms, and more.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔄</div>
+                <h3>Smart Execution</h3>
+                <p>Spin detects available tools and runs your app appropriately. No manual translation needed.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Zero Configuration</h3>
+                <p>Start with sensible defaults. Customize only what matters for your app.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Get Started in 60 Seconds</h2>
+            <p class="cta-subtitle">Stop writing the same configs in different languages.</p>
+            <div class="buttons">
+                <a href="/quickstart" class="btn btn-primary">
+                    🚀 Quick Start Guide
+                </a>
+                <a href="/examples" class="btn btn-secondary">
+                    📚 View Examples
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="logo-small">SPIN</div>
+            <p>The Multi-Target Application Manifest Language</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                <a href="https://github.com/spin" style="color: #60a5fa; text-decoration: none;">GitHub</a> • 
+                <a href="/docs" style="color: #60a5fa; text-decoration: none;">Documentation</a> • 
+                <a href="/community" style="color: #60a5fa; text-decoration: none;">Community</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

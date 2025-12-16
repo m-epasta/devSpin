@@ -1,0 +1,29 @@
+{
+  "id": "concepts",
+  "title": "Core Concepts",
+  "description": "Understanding SPN targets, modes, and builtins",
+  "source": "@site/docs/concepts.md",
+  "sourceDirName": ".",
+  "slug": "/concepts",
+  "permalink": "/docs/concepts",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/spin/docs/edit/main/docs/concepts.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "title": "Core Concepts",
+    "description": "Understanding SPN targets, modes, and builtins",
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "First Real Project",
+    "permalink": "/docs/first-project"
+  },
+  "next": {
+    "title": "FAQ",
+    "permalink": "/docs/faq"
+  }
+}

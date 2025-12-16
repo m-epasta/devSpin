@@ -20,6 +20,9 @@ Thumbs.db
 .env.local
 venv/
 SKIP.md
+build/
+.docausaurs/
+node_modules/
 
 # Temporary files
 *.tmp

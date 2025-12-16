@@ -1,0 +1,104 @@
+/* src/components/SpinExample.css */
+.spin-example {
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--spn-gray-700);
+  background: var(--spn-gray-800);
+}
+
+.spin-example h3 {
+  margin: 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(45deg, var(--spn-primary), var(--spn-secondary));
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.spin-example-description {
+  padding: 0 1.5rem;
+  color: var(--spn-gray-400);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.example-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .example-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.code-block {
+  background: var(--spn-gray-900);
+  border-right: 1px solid var(--spn-gray-700);
+}
+
+.code-block .prism-code {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  background: transparent !important;
+}
+
+.terminal-block {
+  background: var(--spn-gray-900);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem 0.25rem;
+  background: var(--spn-gray-800);
+  border-bottom: 1px solid var(--spn-gray-700);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red {
+  background: #ef4444;
+}
+
+.terminal-dot.yellow {
+  background: #f59e0b;
+}
+
+.terminal-dot.green {
+  background: #10b981;
+}
+
+.terminal-header span {
+  color: var(--spn-gray-400);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.terminal-block .prism-code {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  background: transparent !important;
+}
+
+.terminal-block pre {
+  margin: 0;
+  padding: 1rem 1.5rem;
+}

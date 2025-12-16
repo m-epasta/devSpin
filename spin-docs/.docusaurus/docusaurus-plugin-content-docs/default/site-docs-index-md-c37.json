@@ -1,0 +1,26 @@
+{
+  "id": "index",
+  "title": "Welcome to SPIN",
+  "description": "Declare once. Run anywhere. The multi-target application manifest language.",
+  "source": "@site/docs/index.md",
+  "sourceDirName": ".",
+  "slug": "/",
+  "permalink": "/docs/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/spin/docs/edit/main/docs/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "Welcome to SPIN",
+    "description": "Declare once. Run anywhere. The multi-target application manifest language.",
+    "slug": "/",
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Quick Start",
+    "permalink": "/docs/quickstart"
+  }
+}

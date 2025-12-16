@@ -3,184 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="3; url=/docs/quickstart">
-    <title>SPIN - Declare once. Run anywhere.</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        .welcome-container {
-            text-align: center;
-            padding: 3rem;
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: 16px;
-            border: 1px solid #334155;
-            backdrop-filter: blur(10px);
-            max-width: 600px;
-            margin: 2rem;
-        }
-        .logo {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #60a5fa, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-        .tagline {
-            font-size: 1.5rem;
-            color: #94a3b8;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #334155;
-            border-top: 4px solid #6366f1;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-            font-size: 0.9rem;
-        }
-        .feature {
-            padding: 1rem;
-            background: rgba(51, 65, 85, 0.5);
-            border-radius: 8px;
-            border: 1px solid #475569;
-        }
-        .feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .redirect-text {
-            color: #94a3b8;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-        }
-        .buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .btn-primary {
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-            color: white;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
-            color: white;
-            text-decoration: none;
-        }
-        .btn-secondary {
-            background: #334155;
-            color: #e2e8f0;
-            border: 1px solid #475569;
-        }
-        .btn-secondary:hover {
-            background: #475569;
-            color: #e2e8f0;
-            text-decoration: none;
-        }
-        .countdown {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 1rem;
-        }
-    </style>
+    <meta http-equiv="refresh" content="0; url=/docs">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>SPIN Documentation</title>
+    <script>
+        // Immediate redirect
+        window.location.replace('/docs');
+        // Fallback if replace fails
+        setTimeout(function() {
+            window.location.href = '/docs';
+        }, 0);
+    </script>
 </head>
 <body>
-    <div class="welcome-container">
-        <h1 class="logo">SPIN</h1>
-        <p class="tagline">Declare once. Run anywhere.</p>
-
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <div><strong>One Manifest</strong></div>
-                <div>Multi-platform deployment</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <div><strong>Zero Config</strong></div>
-                <div>Smart defaults & auto-detection</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔧</div>
-                <div><strong>Developer First</strong></div>
-                <div>Modern tooling & DX</div>
-            </div>
-        </div>
-
-        <div class="spinner"></div>
-        <p class="redirect-text">Taking you to the Quick Start guide...</p>
-
-        <div class="buttons">
-            <a href="/docs/quickstart" class="btn btn-primary">
-                🚀 Get Started Now
-            </a>
-            <a href="/docs/concepts" class="btn btn-secondary">
-                📖 Learn Concepts
-            </a>
-        </div>
-
-        <div class="countdown" id="countdown">Redirecting in 3 seconds...</div>
-    </div>
-
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=/docs">
+    </noscript>
+    <p>If you are not redirected automatically, <a href="/docs">click here</a>.</p>
     <script>
-        let countdown = 3;
-        const countdownEl = document.getElementById('countdown');
-
-        const timer = setInterval(() => {
-            countdown--;
-            if (countdown > 0) {
-                countdownEl.textContent = `Redirecting in ${countdown} seconds...`;
-            } else {
-                clearInterval(timer);
-                window.location.href = '/docs/quickstart';
+        // Multiple fallback redirects
+        window.onload = function() {
+            window.location.replace('/docs');
+        };
+        // Additional fallback
+        setTimeout(function() {
+            if (window.location.pathname === '/' || window.location.pathname === '') {
+                window.location.replace('/docs');
             }
-        }, 1000);
-
-        // Fallback redirect
-        setTimeout(() => {
-            if (countdown > 0) {
-                window.location.href = '/docs/quickstart';
-            }
-        }, 4000);
+        }, 100);
     </script>
 </body>
 </html>

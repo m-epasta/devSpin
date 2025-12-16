@@ -26,9 +26,7 @@ module.exports = {
     ],
   ],
 
-  clientModules: [
-    require.resolve('./src/prism-languages/prism-spin.js'),
-  ],
+
 
   themeConfig: {
     navbar: {
@@ -109,9 +107,14 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} SPIN. Built with Docusaurus.`,
     },
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
     prism: {
       theme: require('prism-react-renderer').themes.dracula,
-      additionalLanguages: ['bash', 'yaml', 'docker', 'spin'],
+      additionalLanguages: ['bash', 'yaml', 'docker'],
     },
     algolia: {
       appId: 'YOUR_APP_ID',

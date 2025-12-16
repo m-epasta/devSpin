@@ -11,6 +11,9 @@
   "editUrl": "https://github.com/spin/docs/edit/main/docs/first-project.md",
   "tags": [],
   "version": "current",
+  "lastUpdatedBy": "m-epasta",
+  "lastUpdatedAt": 1765912022,
+  "formattedLastUpdatedAt": "Dec 16, 2025",
   "sidebarPosition": 4,
   "frontMatter": {
     "title": "First Real Project",

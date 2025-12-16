@@ -29,9 +29,6 @@ export default {
       }
     ]
   ],
-  "clientModules": [
-    "/workspaces/ubuntu/devSpin/spin-docs/src/prism-languages/prism-spin.js"
-  ],
   "themeConfig": {
     "navbar": {
       "title": "SPIN",
@@ -111,6 +108,11 @@ export default {
         }
       ],
       "copyright": "Copyright © 2025 SPIN. Built with Docusaurus."
+    },
+    "colorMode": {
+      "defaultMode": "dark",
+      "disableSwitch": false,
+      "respectPrefersColorScheme": true
     },
     "prism": {
       "theme": {
@@ -226,11 +228,6 @@ export default {
       "searchParameters": {},
       "searchPagePath": "search"
     },
-    "colorMode": {
-      "defaultMode": "light",
-      "disableSwitch": false,
-      "respectPrefersColorScheme": false
-    },
     "docs": {
       "versionPersistence": "localStorage",
       "sidebar": {
@@ -263,6 +260,7 @@ export default {
   "scripts": [],
   "headTags": [],
   "stylesheets": [],
+  "clientModules": [],
   "titleDelimiter": "|",
   "noIndex": false,
   "markdown": {

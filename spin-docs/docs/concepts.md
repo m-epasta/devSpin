@@ -8,21 +8,21 @@ import Diagram from '@site/src/components/Diagram';
 
 # 🎯 Core Concepts
 
-SPN is built around a few key concepts that make "declare once, run anywhere" possible. Understanding these will help you write better SPN files and troubleshoot issues.
+spin is built around a few key concepts that make "declare once, run anywhere" possible. Understanding these will help you write better spin files and troubleshoot issues.
 
-## 🏗️ The Mental Model
+##  The Mental Model
 
-Think of SPN as a **universal translator** for application manifests:
+Think of spin as a **universal translator** for application manifests:
 
 1. **You describe** what your app needs (language, dependencies, ports, etc.)
-2. **SPN understands** your intent and generates platform-specific configs
+2. **spin understands** your intent and generates platform-specific configs
 3. **Multiple platforms** get the configs they need (Docker, Kubernetes, AWS, etc.)
 
-No more writing the same thing in 5 different YAML formats!
+No more writing the same thing in 5 different formats!
 
-## 🎯 Targets
+## Targets
 
-Targets are the **output platforms** SPN can generate configs for. Each target speaks a different "language":
+Targets are the **output platforms** spin can generate configs for. Each target speaks a different "language":
 
 ### Built-in Targets
 
@@ -37,22 +37,28 @@ Targets are the **output platforms** SPN can generate configs for. Each target s
 ### Target Syntax
 
 ```spn
-#! spn 1.0
-{ name: "my-app" }
-
-app "web" {
-  type: "node"
-  port: 3000
-}
-
-; Target a specific platform
-run docker {
-  ; Docker-specific options
-}
-
 ; Or target multiple platforms
 run docker, kubernetes {
   ; Shared configuration
+} TODO: translate this block into real spin
+
+cfg
+{
+  name: "my-app",
+  version: 1.0.0,
+}
+
+@service>web |
+@runtime>node |
+@interpret>build {
+  port: 3000,
+  main: "./server/server.js",
+}
+
+@container>docker |
+@transpile>root ; here, the file is also transpiled to build/ but if you want, you can add a path to have a copy (copy will not be used).
+{
+  ; Docker specific code
 }
 ```
 

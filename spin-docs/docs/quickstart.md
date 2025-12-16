@@ -86,7 +86,7 @@ Create `app.spn`:
 #! spn 1.0
 cfg{ 
   name: "my-first-spin-app",
-  version: 1.0.0
+  version: 1.0.0,
 }
 
 @service>web | ; pipe is necessary

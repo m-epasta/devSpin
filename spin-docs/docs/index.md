@@ -9,7 +9,7 @@ import {Redirect} from '@docusaurus/router';
 
 <Redirect to="/docs/quickstart" />
 
-# 🚀 Welcome to SPIN
+# Welcome to SPIN
 
 **Declare once. Run anywhere.** Stop writing the same configurations in different languages. Write your app manifest once, and let SPIN generate Dockerfiles, Kubernetes YAML, Terraform configs, and more.
 

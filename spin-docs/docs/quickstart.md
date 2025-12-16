@@ -5,7 +5,7 @@ slug: /quickstart
 sidebar_position: 2
 ---
 
-# 🚀 Quick Start
+#  Quick Start
 
 Get SPN running in your environment in less than 5 minutes. By the end of this guide, you'll have a working application that SPN manages completely.
 
@@ -21,7 +21,7 @@ No Docker, Kubernetes, or cloud accounts required for this quick start!
 
 Choose your installation method:
 
-### Option A: One-liner (Recommended)
+### Option A: One-line command (Recommended)
 
 ```bash
 curl -fsSL https://spin.dev/install.sh | sh
@@ -51,9 +51,9 @@ spin --version
 # Should output: spin 1.0.0
 ```
 
-## 2. Create Your First SPN Project
+## 2. Create Your First Project including spin
 
-SPN can initialize a project for you:
+Spin can initialize a project for you:
 
 ```bash
 # Create a new directory
@@ -61,12 +61,15 @@ mkdir my-first-spin-app
 cd my-first-spin-app
 
 # Initialize with SPN
-spin init
+spin init # you can add flags to choose templates 
 ```
 
 This creates:
 - `app.spn` - Your application manifest
 - Basic project structure
+
+**IMPORTANT**
+  The spn file get shortcuted so make sure you like the name (you can change it with no consequences)
 
 ### Manual Creation (Alternative)
 
@@ -81,20 +84,32 @@ Create `app.spn`:
 
 ```spn
 #! spn 1.0
-{ name: "hello-spin" }
+cfg{ 
+  name: "my-first-spin-app",
+  version: 1.0.0
+}
 
-app "web" {
-  type: "node"
+@service>web | ; pipe is necessary
+@runtime>node |
+@interpret>dist
+{
   port: 3000
   run: "npm start"
 }
 ```
 
+So here: 
+1. versioning and configs are minimal <code>#! spn 1.0</code> stand for the interpretor version
+<code>{ name: "my-first-spin-app" }</code> is a minimal config (more is allowed)
+
+2. @ chain is targets: Here, it first say that this a service (not an app for scalability) .Then, it tells what is the current runtime, so nodejs. Finnaly, it tells the intepretor that he has to interpret it and put the output in dist/ that gets run in the main Docker file 
+
+
 Create a simple `package.json`:
 
 ```json
 {
-  "name": "hello-spin",
+  "name": "my-first-spin-app",
   "version": "1.0.0",
   "scripts": {
     "start": "node server.js"
@@ -104,6 +119,8 @@ Create a simple `package.json`:
   }
 }
 ```
+Here, you create a simple package.json that defines version of the app, name, the scripts and the dependencies
+
 
 Create `server.js`:
 
@@ -116,9 +133,9 @@ app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html>
-      <head><title>Hello SPIN!</title></head>
+      <head><title>Hello spin!</title></head>
       <body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
-        <h1>🚀 Hello from SPIN!</h1>
+        <h1> Hello from spin!</h1>
         <p>Your app is running successfully.</p>
         <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
         <p><strong>Environment:</strong> ${process.env.NODE_ENV || 'development'}</p>
@@ -157,13 +174,12 @@ spin run
 You should see output like:
 
 ```
-✅ SPN detected Node.js project
-📦 Generated Dockerfile
-🐳 Generated docker-compose.yml
-🚀 Starting application...
-   Web server: http://localhost:3000
-   Dev mode: enabled (hot-reload active)
+SPN detected Node.js project
+Generated Dockerfile
+Starting application...
+  Web server: http://localhost:3000
 ```
+You can customize the output by using flags and devSpin (coming soon...)
 
 ## 4. Verify It's Working
 
@@ -171,37 +187,18 @@ Open your browser to **http://localhost:3000**
 
 You should see a page that says "Hello from SPIN!" with the current time.
 
-### Test Hot-Reload
-
-Modify `server.js` - change the greeting text. Save the file. The page should automatically refresh with your changes!
-
 ## 5. Explore What SPN Created
 
 SPN generates platform-specific configs for you. Check what was created:
 
 ```bash
+cd dist/
 ls -la
 ```
 
 You might see:
 - `Dockerfile` - Container definition
-- `docker-compose.yml` - Multi-service orchestration
-- `.spin/` - SPN working directory
-
-### Try Different Targets
-
-SPN can target different platforms. Try:
-
-```bash
-# Generate Kubernetes manifests
-spin run --target kubernetes
-
-# Generate Terraform for AWS
-spin run --target terraform
-
-# Just validate without running
-spin validate
-```
+- `.spin/` - spin working directory
 
 ## 🎉 Congratulations!
 
@@ -213,7 +210,7 @@ You've successfully:
 
 ## 🚀 Next Steps
 
-Now that you have SPN working, explore:
+Now that you have spin working, explore:
 
 - **[Core Concepts](/docs/concepts)** - Learn about targets, modes, and builtins
 - **[First Real Project](/docs/first-project)** - Migrate an existing application

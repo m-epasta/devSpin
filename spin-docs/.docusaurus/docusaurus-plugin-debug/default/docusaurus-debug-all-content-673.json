@@ -1,0 +1,251 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "loadedVersions": [
+        {
+          "versionName": "current",
+          "label": "Next",
+          "banner": null,
+          "badge": false,
+          "noIndex": false,
+          "className": "docs-version-current",
+          "path": "/docs",
+          "tagsPath": "/docs/tags",
+          "editUrl": "https://github.com/spin/docs/edit/main/docs",
+          "editUrlLocalized": "https://github.com/spin/docs/edit/main/i18n/en/docusaurus-plugin-content-docs/current",
+          "isLast": true,
+          "routePriority": -1,
+          "sidebarFilePath": "/workspaces/ubuntu/devSpin/spin-docs/sidebars.js",
+          "contentPath": "/workspaces/ubuntu/devSpin/spin-docs/docs",
+          "contentPathLocalized": "/workspaces/ubuntu/devSpin/spin-docs/i18n/en/docusaurus-plugin-content-docs/current",
+          "docs": [
+            {
+              "id": "concepts",
+              "title": "Core Concepts",
+              "description": "Understanding SPN targets, modes, and builtins",
+              "source": "@site/docs/concepts.md",
+              "sourceDirName": ".",
+              "slug": "/concepts",
+              "permalink": "/docs/concepts",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/spin/docs/edit/main/docs/concepts.md",
+              "tags": [],
+              "version": "current",
+              "lastUpdatedBy": "Author",
+              "lastUpdatedAt": 1539502055,
+              "formattedLastUpdatedAt": "Oct 14, 2018",
+              "sidebarPosition": 3,
+              "frontMatter": {
+                "title": "Core Concepts",
+                "description": "Understanding SPN targets, modes, and builtins",
+                "sidebar_position": 3
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "First Real Project",
+                "permalink": "/docs/first-project"
+              },
+              "next": {
+                "title": "FAQ",
+                "permalink": "/docs/faq"
+              }
+            },
+            {
+              "id": "faq",
+              "title": "FAQ",
+              "description": "Frequently asked questions about SPN and common concerns",
+              "source": "@site/docs/faq.md",
+              "sourceDirName": ".",
+              "slug": "/faq",
+              "permalink": "/docs/faq",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/spin/docs/edit/main/docs/faq.md",
+              "tags": [],
+              "version": "current",
+              "lastUpdatedBy": "Author",
+              "lastUpdatedAt": 1539502055,
+              "formattedLastUpdatedAt": "Oct 14, 2018",
+              "sidebarPosition": 5,
+              "frontMatter": {
+                "title": "FAQ",
+                "description": "Frequently asked questions about SPN and common concerns",
+                "sidebar_position": 5
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Core Concepts",
+                "permalink": "/docs/concepts"
+              }
+            },
+            {
+              "id": "first-project",
+              "title": "First Real Project",
+              "description": "Step-by-step guide to migrating an existing app to SPN",
+              "source": "@site/docs/first-project.md",
+              "sourceDirName": ".",
+              "slug": "/first-project",
+              "permalink": "/docs/first-project",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/spin/docs/edit/main/docs/first-project.md",
+              "tags": [],
+              "version": "current",
+              "lastUpdatedBy": "Author",
+              "lastUpdatedAt": 1539502055,
+              "formattedLastUpdatedAt": "Oct 14, 2018",
+              "sidebarPosition": 4,
+              "frontMatter": {
+                "title": "First Real Project",
+                "description": "Step-by-step guide to migrating an existing app to SPN",
+                "sidebar_position": 4
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Quick Start",
+                "permalink": "/docs/quickstart"
+              },
+              "next": {
+                "title": "Core Concepts",
+                "permalink": "/docs/concepts"
+              }
+            },
+            {
+              "id": "index",
+              "title": "Welcome to SPIN",
+              "description": "Declare once. Run anywhere. The multi-target application manifest language.",
+              "source": "@site/docs/index.md",
+              "sourceDirName": ".",
+              "slug": "/",
+              "permalink": "/docs/",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/spin/docs/edit/main/docs/index.md",
+              "tags": [],
+              "version": "current",
+              "lastUpdatedBy": "Author",
+              "lastUpdatedAt": 1539502055,
+              "formattedLastUpdatedAt": "Oct 14, 2018",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Welcome to SPIN",
+                "description": "Declare once. Run anywhere. The multi-target application manifest language.",
+                "slug": "/",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "next": {
+                "title": "Quick Start",
+                "permalink": "/docs/quickstart"
+              }
+            },
+            {
+              "id": "quickstart",
+              "title": "Quick Start",
+              "description": "Get spin running in 5 minutes",
+              "source": "@site/docs/quickstart.md",
+              "sourceDirName": ".",
+              "slug": "/quickstart",
+              "permalink": "/docs/quickstart",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/spin/docs/edit/main/docs/quickstart.md",
+              "tags": [],
+              "version": "current",
+              "lastUpdatedBy": "Author",
+              "lastUpdatedAt": 1539502055,
+              "formattedLastUpdatedAt": "Oct 14, 2018",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "title": "Quick Start",
+                "description": "Get spin running in 5 minutes",
+                "slug": "/quickstart",
+                "sidebar_position": 2
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Welcome to SPIN",
+                "permalink": "/docs/"
+              },
+              "next": {
+                "title": "First Real Project",
+                "permalink": "/docs/first-project"
+              }
+            }
+          ],
+          "drafts": [],
+          "sidebars": {
+            "tutorialSidebar": [
+              {
+                "type": "doc",
+                "id": "index"
+              },
+              {
+                "type": "category",
+                "label": "Getting Started",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "quickstart"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "first-project"
+                  }
+                ],
+                "collapsed": true,
+                "collapsible": true
+              },
+              {
+                "type": "category",
+                "label": "Core Concepts",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "concepts"
+                  }
+                ],
+                "collapsed": true,
+                "collapsible": true
+              },
+              {
+                "type": "doc",
+                "id": "faq"
+              },
+              {
+                "type": "link",
+                "label": "GitHub",
+                "href": "https://github.com/spin"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "docusaurus-plugin-content-blog": {
+    "default": {
+      "blogSidebarTitle": "Recent posts",
+      "blogPosts": [],
+      "blogListPaginated": [],
+      "blogTags": {},
+      "blogTagsListPath": "/blog/tags",
+      "blogTagsPaginated": []
+    }
+  },
+  "docusaurus-plugin-content-pages": {
+    "default": [
+      {
+        "type": "jsx",
+        "permalink": "/",
+        "source": "@site/src/pages/index.js"
+      }
+    ]
+  },
+  "docusaurus-plugin-debug": {},
+  "docusaurus-theme-classic": {},
+  "docusaurus-theme-search-algolia": {},
+  "docusaurus-bootstrap-plugin": {},
+  "docusaurus-mdx-fallback-plugin": {}
+}

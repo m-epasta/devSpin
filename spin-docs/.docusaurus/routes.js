@@ -56,6 +56,11 @@ export default [
     ]
   },
   {
+    path: '/',
+    component: ComponentCreator('/', 'dbb'),
+    exact: true
+  },
+  {
     path: '*',
     component: ComponentCreator('*'),
   },

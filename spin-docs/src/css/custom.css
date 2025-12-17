@@ -2,15 +2,15 @@
 
 /* SPN Design System Variables */
 :root {
-  --spn-primary: #6366f1;
-  --spn-primary-dark: #4f46e5;
-  --spn-primary-darker: #4338ca;
-  --spn-primary-light: #818cf8;
-  --spn-primary-lighter: #a5b4fc;
+  --spn-primary: #0ea5e9;
+  --spn-primary-dark: #0284c7;
+  --spn-primary-darker: #0369a1;
+  --spn-primary-light: #38bdf8;
+  --spn-primary-lighter: #7dd3fc;
 
-  --spn-secondary: #8b5cf6;
-  --spn-secondary-dark: #7c3aed;
-  --spn-secondary-light: #a78bfa;
+  --spn-secondary: #06b6d4;
+  --spn-secondary-dark: #0891b2;
+  --spn-secondary-light: #22d3ee;
 
   --spn-success: #10b981;
   --spn-success-dark: #059669;
@@ -107,7 +107,7 @@ body {
 /* Custom callouts */
 .alert--info {
   border-left-color: var(--spn-primary);
-  background-color: rgba(99, 102, 241, 0.1);
+  background-color: rgba(14, 165, 233, 0.1);
   border-left-width: 4px;
 }
 
@@ -131,7 +131,7 @@ body {
 
 .alert--secondary {
   border-left-color: var(--spn-secondary);
-  background-color: rgba(139, 92, 246, 0.1);
+  background-color: rgba(6, 182, 212, 0.1);
   border-left-width: 4px;
 }
 
@@ -170,7 +170,7 @@ body {
 
 .button--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.5);
   color: white;
   text-decoration: none;
 }
@@ -202,7 +202,7 @@ body {
 
 .card:hover {
   border-color: var(--spn-primary);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
 }
 
 /* Table styling */
@@ -242,7 +242,7 @@ body {
 }
 
 .menu__link--active {
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(14, 165, 233, 0.1);
   color: var(--spn-primary) !important;
   border-left: 3px solid var(--spn-primary);
 }

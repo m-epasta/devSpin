@@ -9,28 +9,28 @@ export default function Diagram({ type, title }) {
         return (
           <div className="diagram-targets">
             <div className="diagram-step">
-              <div className="diagram-box">SPN File</div>
+              <div className="diagram-box">Spin File</div>
               <div className="diagram-arrow">↓</div>
             </div>
             <div className="diagram-step">
-              <div className="diagram-box">Target Processor</div>
+              <div className="diagram-box">Target Interpreting</div>
               <div className="diagram-arrow">↓</div>
             </div>
             <div className="diagram-step">
-              <div className="diagram-box">Platform Configs</div>
+              <div className="diagram-box">Target Execution</div>
             </div>
             <div className="diagram-branches">
               <div className="diagram-branch">
                 <div className="diagram-arrow">→</div>
-                <div className="diagram-box small">Dockerfile</div>
+                <div className="diagram-box small">Container</div>
               </div>
               <div className="diagram-branch">
                 <div className="diagram-arrow">→</div>
-                <div className="diagram-box small">K8s YAML</div>
+                <div className="diagram-box small">Cluster</div>
               </div>
               <div className="diagram-branch">
                 <div className="diagram-arrow">→</div>
-                <div className="diagram-box small">Terraform</div>
+                <div className="diagram-box small">Deployment</div>
               </div>
             </div>
           </div>

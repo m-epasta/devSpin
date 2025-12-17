@@ -12,7 +12,7 @@
       {
         "type": "link",
         "label": "Welcome to SPIN",
-        "href": "/docs/",
+        "href": "/docs/docs/",
         "docId": "index",
         "unlisted": false
       },

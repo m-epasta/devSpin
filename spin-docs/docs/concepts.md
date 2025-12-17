@@ -28,8 +28,8 @@ Targets are the **output platforms** spin can generate configs for. Each target 
 
 | Target | Purpose | Generates | When to Use |
 |--------|---------|-----------|-------------|
-| `docker` | Containerization | `Dockerfile`, `docker-compose.yml` | Local development, container deployment |
-| `kubernetes` | Orchestration | `deployment.yaml`, `service.yaml`, `configmap.yaml` | Production Kubernetes clusters |
+| `container` | Containerization | `Dockerfile`, `podman` | Local development, container deployment |
+| `cluster` | Orchestration | `deployment.yaml`, `service.yaml`, `configmap.yaml` | Production Kubernetes clusters |
 | `terraform` | Infrastructure | `main.tf`, `variables.tf` | Cloud infrastructure (AWS, GCP, Azure) |
 | `compose` | Local orchestration | `docker-compose.yml` | Multi-service local development |
 | `helm` | K8s packaging | `Chart.yaml`, `values.yaml` | Kubernetes application packaging |
@@ -37,10 +37,6 @@ Targets are the **output platforms** spin can generate configs for. Each target 
 ### Target Syntax
 
 ```spn
-; Or target multiple platforms
-run docker, kubernetes {
-  ; Shared configuration
-} TODO: translate this block into real spin
 
 cfg
 {
@@ -60,26 +56,38 @@ cfg
 {
   ; Docker specific code
 }
+
+@cluster>kubernetes |
+@transpile>build ; does not make a copy in root
+{
+  ; kubernetes specific code
+}
+
+run>cfg {
+
+}
+
 ```
 
 ### How Targets Work
 
 <Diagram type="targets" />
 
-1. **SPN Parser** reads your manifest
+1. **spin Parser** reads your manifest
 2. **Target Processor** converts to platform-specific format
 3. **Platform Tools** execute the generated configs
 
 ## 🎛️ Modes
 
-Modes control **how** SPN executes your application. Different modes for different situations:
+Modes control **how** spin executes your application. Different modes for different situations:
+**NOTE**: modes are defined as macros version `@[]`
 
 ### Execution Modes
 
 | Mode | Behavior | Use Case |
 |------|----------|----------|
-| `execute-required` | Must execute, fail if runtime missing | Production deployments |
-| `execute-if-available` | Try to execute, fallback to transpile | Development (default) |
+| `exec-required` | Must execute, fail if runtime missing | Production deployments |
+| `try-exec` | Try to execute, fallback to transpile | Development (default) |
 | `transpile-only` | Generate configs only, don't run | CI/CD pipelines |
 
 ### Mode Syntax
@@ -88,33 +96,36 @@ Modes control **how** SPN executes your application. Different modes for differe
 #! spn 1.0
 
 ; Development mode (default)
+@[try-exec]
 run local {
-  mode: execute-if-available  ; Try to run, generate if can't
+  ; Try to run, generate if can't
 }
 
 ; Production mode
-run production {
-  mode: execute-required      ; Must run, fail if dependencies missing
+@[exec-required]
+run production {      
+  ; Must run, fail if dependencies missing
   scaling: { min: 3, max: 10 }
 }
 
 ; CI mode
+@[transpile-only]
 run ci {
-  mode: transpile-only        ; Just generate configs
+  ; Just generate configs
 }
 ```
 
 ### Mode Detection
 
-SPN automatically detects your environment:
+spin automatically detects your environment:
 
-- **Local development**: Uses `execute-if-available`
+- **Local development**: Uses `try-exec`
 - **CI/CD**: Uses `transpile-only`
 - **Production**: Uses `execute-required`
 
 ## 🔧 Builtins
 
-Builtins are SPN's **built-in functions** that handle common tasks. They're prefixed with `#!` and use the file's version:
+Builtins are spin's **built-in functions** that handle common tasks. They're prefixed with `#!` and use the file's version:
 
 ### Common Builtins
 
@@ -123,19 +134,21 @@ Builtins are SPN's **built-in functions** that handle common tasks. They're pref
 | `validate-config` | Check configuration | `#! validate-config` |
 | `optimize-image` | Optimize container images | `#! optimize-image` |
 | `health-check` | Add health checks | `#! health-check` |
-| `exec-scripts` | Execute shell scripts | `#! exec-scripts` |
+| `exec-scripts` | Make shell scripts executable | `#! exec-scripts` |
 
 ### Builtin Syntax
 
 ```spn
 #! spn 1.0  ; Version applies to all builtins
 
-app "web" {
-  type: "node"
-  #! validate-config  ; Uses v1.0
+@service>web |
+@runtime>node |
+@interpret
+{
+  ; node config - You can point to package.json or to his dep (if defined) as #cfg<name/of/your/file>
 }
 
-scripts {
+scripts { ; keyword
   #! exec-scripts {   ; Uses v1.0
     #!/usr/bin/env bash
     echo "Building app..."
@@ -148,56 +161,26 @@ scripts {
 
 The `#! spn X.Y` at the top **sets the version for the entire file**. All builtins use this version automatically.
 
-## 🏷️ Types
 
-Types tell SPN what kind of application you're building:
-
-### Application Types
-
-| Type | Description | Examples |
-|------|-------------|----------|
-| `node` | Node.js application | Express, Next.js, Nuxt |
-| `python` | Python application | Flask, Django, FastAPI |
-| `go` | Go application | Gin, Echo, net/http |
-| `rust` | Rust application | Actix, Rocket, Warp |
-| `java` | Java application | Spring Boot, Micronaut |
-| `dotnet` | .NET application | ASP.NET Core |
-| `static` | Static website | HTML/CSS/JS |
-
-### Type Detection
-
-SPN auto-detects types from your files:
-
-```spn
-; Auto-detected from package.json
-app "api" {
-  type: "node"  ; Detected automatically
-}
-
-; Explicit type override
-app "worker" {
-  type: "python:3.11"  ; Specific version
-}
-```
-
-## 📦 Dependencies
+## Dependencies
 
 Dependencies are services your app needs (databases, caches, etc.):
 
 ### Built-in Dependencies
 
 ```spn
-app "web" {
-  type: "node"
-  needs: [postgres, redis, rabbitmq]
+@service>web |
+@runtime>node |
+@intepret
+{
+  #deps: [postgres, redis, rabbitmq]
+  ; OR
+  #deps: #cfg>package.json ; # means define (used for configs)
 }
+
 ```
 
-SPN automatically:
-- Generates connection configs
-- Sets environment variables
-- Creates network connections
-- Handles service discovery
+Spin let you define deps or to point to a config file
 
 ### Custom Dependencies
 
@@ -214,9 +197,22 @@ app "web" {
     }
   ]
 }
+
+@service>web |
+@runtime>node |
+@intepret
+{
+  #deps: [
+    postgres {
+      version: "15",
+      port: 5432,
+    },
+    redis { version: 7, port: 6379, }
+  ]
+}
 ```
 
-## 🔄 Workspaces
+## Workspaces
 
 Workspaces define your **project structure**:
 
@@ -227,14 +223,12 @@ Workspaces define your **project structure**:
   workspace: "./app"  ; Base directory
 }
 
-app "frontend" {
-  type: "react"
-  workspace: "./frontend"  ; Relative to base
-}
-
-app "backend" {
-  type: "node"
-  workspace: "./backend"   ; Relative to base
+@service>web |
+@runtime>js-fw | ; fw stand for framework 
+@fw>react |
+@intepret
+{
+ TODO: complete
 }
 ```
 
@@ -242,7 +236,7 @@ app "backend" {
 
 Here's what happens when you run `spin run`:
 
-1. **Parse** SPN file
+1. **Parse** spin file
 2. **Validate** configuration
 3. **Detect** environment and available tools
 4. **Generate** target-specific configs

@@ -1,7 +1,7 @@
 ---
 title: Welcome to SPIN
 description: Declare once. Run anywhere. The multi-target application manifest language.
-slug: /
+slug: /docs/
 sidebar_position: 1
 ---
 

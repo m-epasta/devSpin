@@ -9,25 +9,25 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '334'),
+    component: ComponentCreator('/docs', 'eaf'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '92a'),
+        component: ComponentCreator('/docs', '3fa'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '4a5'),
+            component: ComponentCreator('/docs', '460'),
             routes: [
               {
-                path: '/docs/',
-                component: ComponentCreator('/docs/', 'a8c'),
+                path: '/docs/concepts',
+                component: ComponentCreator('/docs/concepts', 'fb5'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/concepts',
-                component: ComponentCreator('/docs/concepts', 'fb5'),
+                path: '/docs/docs/',
+                component: ComponentCreator('/docs/docs/', '634'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
